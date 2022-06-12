@@ -3,6 +3,7 @@ import Die from "./components/Die";
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import "./style.css";
+//Feature updated
 export default function App() {
   const [numArray, setnumArray] = useState(allNewDice());
 
