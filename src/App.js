@@ -1,22 +1,31 @@
 import React from "react";
 import Die from "./components/Die";
-import './style.css'
+import { nanoid } from "nanoid";
+import { useState } from "react";
+import "./style.css";
 export default function App() {
-  return (
-      <main>
-          <div className="dice-container">
-              <Die value="1" />
-              <Die value="2" />
-              <Die value="3" />
-              <Die value="4" />
-              <Die value="5" />
-              <Die value="6" />
-              <Die value="1" />
-              <Die value="1" />
-              <Die value="1" />
-              <Die value="1" />
-          </div>
-      </main>
-  )
-}
+  const [numArray, setnumArray] = useState(allNewDice());
 
+  function allNewDice() {
+    const newDice = [];
+    for (let i = 0; i < 10; i++) {
+      newDice.push(Math.ceil(Math.random() * 6));
+    }
+    return newDice;
+  }
+
+  const ReRollDice=()=>{
+    setnumArray(allNewDice())
+  }
+
+  const diceElements = numArray.map((num) => {
+    return <Die key={nanoid()} value={num} />;
+  });
+
+  return (
+    <main>
+      <div className="dice-container">{diceElements}</div>
+      <button className="roll-dice" onClick={ReRollDice}>Roll</button>
+    </main>
+  );
+}
