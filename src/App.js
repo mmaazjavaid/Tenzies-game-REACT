@@ -8,7 +8,14 @@ export default function App() {
   const [Dies, setDies] = useState(allNewDice());
   const [tenzies,settenzies]=useState(false);
   useEffect(()=>{
-    console.log("Dies array changed")
+    const allHeld = Dies.every(die => die.isHeld)
+        const firstValue = Dies[0].value
+        const allSameValue = Dies.every(die => die.value === firstValue)
+        if (allHeld && allSameValue) {
+            settenzies(true)
+            console.log("You won!")
+        }
+
   },[Dies])
   function allNewDice() {
     const newDice = [];
