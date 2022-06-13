@@ -34,17 +34,26 @@ export default function App() {
   }
 
   const ReRollDice=()=>{
-    setDies(prevDies=>{
-      return prevDies.map((Die)=>{
-        return Die.isHeld===true?{
-          ...Die
-        }:
-        {
-          ...Die,
-          value:Math.ceil(Math.random() * 6)
-        }
+    if(buttontext==="New Game"){
+      setDies(allNewDice())
+      setbuttontext("Roll")
+      settenzies(false)
+    } 
+     else{
+      setDies(prevDies=>{
+        return prevDies.map((Die)=>{
+          return Die.isHeld===true?{
+            ...Die
+          }:
+          {
+            ...Die,
+            value:Math.ceil(Math.random() * 6)
+          }
+        })
       })
-    })
+     }
+
+      
   }
 
   const diceElements = Dies.map((die) => {
