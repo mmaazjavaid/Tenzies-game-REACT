@@ -20,7 +20,17 @@ export default function App() {
   }
 
   const ReRollDice=()=>{
-    setDies(allNewDice())
+    setDies(prevDies=>{
+      return prevDies.map((Die)=>{
+        return Die.isHeld===true?{
+          ...Die
+        }:
+        {
+          ...Die,
+          value:Math.ceil(Math.random() * 6)
+        }
+      })
+    })
   }
 
   const diceElements = Dies.map((die) => {
@@ -45,6 +55,8 @@ export default function App() {
 
   return (
     <main>
+       <h1 className="title">Tenzies</h1>
+            <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
       <div className="dice-container">{diceElements}</div>
       <button className="roll-dice" onClick={ReRollDice}>Roll</button>
     </main>
